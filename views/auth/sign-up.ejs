@@ -16,5 +16,8 @@
       <input type="password" name="confirmPassword" id="confirmPassword" />
       <button type="submit">Sign up</button>
     </form>
+    <% if (typeof error !== 'undefined') { %>
+        <p><%= error %></p>
+        <% } %>
   </body>
 </html>

@@ -7,9 +7,10 @@
   <link rel="stylesheet" href="/stylesheets/main.css">
 </head>
 <body>
-  <%- include('./partials/nav') %>
-  <h1><%= reader.name %></h1>
-  <p><%= reader.title %></p>
-  <p><%= reader.level %></p>
+    <form action="/reader/<%=reader._id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete <%= reader.name %></button>
+      </form>
+      <a href="/reader/<%= reader._id %>/edit">Edit <%= reader.name %></a>
+      <a href="/reader">Back to Readers Page</a>
 </body>
 </html>

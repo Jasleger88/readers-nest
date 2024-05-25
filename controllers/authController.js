@@ -26,21 +26,25 @@ authRouter.get("/sign-in", (req, res) => {
 });
 
 authRouter.post("/sign-in", async (req, res) => {
-  const userFromDatabase = await UserModel.findOne({
-    username: req.body.username,
-  });
+  try {
+    const userFromDatabase = await UserModel.findOne({
+      username: req.body.username,
+    });
 
-  const passwordsMatch = await bcrypt.compare(
-    req.body.password,
-    userFromDatabase.password
-  );
+    const passwordsMatch = await bcrypt.compare(
+      req.body.password,
+      userFromDatabase.password
+    );
 
-  req.session.user = { username: userFromDatabase.username };
+    req.session.user = { username: userFromDatabase.username };
 
-  if (passwordsMatch) {
-    res.redirect("/");
-  } else {
-    return res.send(`Login Failed`);
+    if (passwordsMatch) {
+      res.redirect("/");
+    } else {
+      return res.send(`Login Failed`);
+    }
+  } catch (error) {
+    res.render("error.ejs", { message: error.message });
   }
 });
 

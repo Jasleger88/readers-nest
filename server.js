@@ -22,15 +22,15 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(morgan('dev'));
 
 app.use(
-    session( {
+    session({
         secret: process.env.SECRET_PASSWORD,
         resave: false,
         saveUninitialized: true,
-        cookie: { secure: false},
+        cookie: { secure: false },
     })
 )
 
-app.use(function (req ,res, next) {
+app.use(function (req, res, next) {
     res.locals.user = req.session.user;
     next();
 })
@@ -40,63 +40,77 @@ app.get("/", (req, res) => {
     res.render("home.ejs")
 });
 
-app.get("/reader", async (req, res) => {
-    const reader = await Reader.find(); 
-
-    res.render("reader.ejs", {
-        reader: reader,
-    });
-});
-
-app.get('/reader/:readerId', async (req, res)=> {
-   const reader = await Readers.findById(req.params.readerId);
-   
-   res.render('show.ejs', {
-    reader});
-});
-
 app.get("/new-reader", async (req, res) => {
     res.render("new.ejs");
 });
 
-app.post('/reader', async (req, res) => {
-    if(req.session.user) {
-        console.log("here is a good reader", req.body);
-        const reader = await Reader.create(req.body);
+app.get("/reader", async (req, res) => {
+    try {
+        const reader = await Reader.find();
+        res.render("reader.ejs", {
+            reader: reader,
+        });
+    } catch (error) {
+        res.render("error.ejs", { error: error.message });
+    }
+});
 
-        res.redirect("/reader");
-    }else {
+app.get('/reader/:readerId', async (req, res) => {
+    try {
+        const reader = await Readers.findById(req.params.readerId);
+
+        res.render('show.ejs', {
+            reader
+        });
+    } catch (error) {
+        res.render("error.ejs", { error: error.message })
+    }
+});
+
+app.post('/reader', async (req, res) => {
+    if (req.session.user) {
+        try {
+            const reader = await Reader.create(req.body);
+            res.redirect("/reader");
+        } catch (error) {
+            res.render("error.ejs", { error: error.message });
+        }
+    } else {
         res.redirect("/auth/sign-in");
     }
 });
 
 
-app.delete('/reader/:readerId', async (req, res)=> {
-    const deletedReader = await Readers.findByIdAndDelete(req.params.readerId);
-    res.send(deletedReader);
-})
-app.put('/reader/:readerId', async (req, res)=> {
-    const UpdateReader = await Readers.findByAndUpdate(
-        req.params.readerId,
-        req.body,
-        { new: true}
-    );
+app.delete('/reader/:readerId', async (req, res) => {
+    if (req.session.user) {
+        try {
+            const deletedReader = await Readers.findByIdAndDelete(req.params.readerId);
+            res.send(deletedReader);
+        } catch (error) {
+            res.render("error.ejs", { erorr: error.message })
+        }
+    } else {
+        res.redirect("/auth/sign-in");
+    }
 });
 
 
+app.put('/reader/:readerId', async (req, res) => {
+    if (req.session.user) {
+        try {
+            const UpdateReader = await Readers.findByAndUpdate(
+                req.params.readerId,
+                req.body,
+                { new: true }
+            );
+        } catch (error) {
+            res.render('error.ejs', { error: error.message });
+        }
+    } else {
+        res.redirect('/auth/sign-in');
+    }
+});
 
-// app.get("/auth/sign-out", async (req, res) => {
-//     res.render("home.ejs");
-// });
-
-// app.get('auth/sign-up', (req, res)=> {
-//     res.render()
-// })
-
-
-// app.get('reader', async (req, res)=> {
-//     res.render('reader', {reader:req.readers})
-// });
 
 const port = process.env.PORT || 3000;
 
