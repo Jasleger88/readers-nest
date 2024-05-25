@@ -1,0 +1,27 @@
+<!-- to add new Book  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+  <%- include('./partials/nav') %>
+  <h1>Opening the Pages Of Wonder</h1>
+ <!-- renders reader.js -->
+  <form action="/reader" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required>
+
+    <label for="level">Level:</label>
+    <input type="number" id="level" name="level" required>
+   
+    <button type="submit">Add Book</button>
+</form>
+</body>
+</html>

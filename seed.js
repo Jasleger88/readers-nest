@@ -18,5 +18,4 @@ async function seed() {
     mongoose.disconnect()
 }
 
-
 seed()
