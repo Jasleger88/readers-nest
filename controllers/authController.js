@@ -12,12 +12,17 @@ authRouter.post("/sign-up", async (req, res) => {
   req.body.password = hash;
 
   try {
+    const userIdDb = await UserModel.find({ username: req.body.username });
+
+    if (userIdDb) {
+      throw new Error("Username already taken");
+    }
+
     const newUser = await UserModel.create(req.body);
     res.redirect("/");
   } catch (error) {
-    if (error.errmsg.includes("duplicate key error")) {
-      res.send(`Username not available <a href="/auth/sign-up">Try again</a>`);
-    }
+    console.log(error);
+    res.render("auth/sign-up.ejs", { error: error.message });
   }
 });
 
@@ -36,7 +41,12 @@ authRouter.post("/sign-in", async (req, res) => {
       userFromDatabase.password
     );
 
-    req.session.user = { username: userFromDatabase.username };
+    console.log(userFromDatabase);
+
+    req.session.user = {
+      username: userFromDatabase.username,
+      userId: userFromDatabase._id,
+    };
 
     if (passwordsMatch) {
       res.redirect("/");

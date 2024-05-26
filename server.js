@@ -103,6 +103,7 @@ app.put('/reader/:readerId', async (req, res) => {
                 req.body,
                 { new: true }
             );
+            res.send(updatedReader)
         } catch (error) {
             res.render('error.ejs', { error: error.message });
         }
