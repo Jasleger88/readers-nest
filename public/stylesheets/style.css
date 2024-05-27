@@ -1,0 +1,142 @@
+body {
+    color:red;
+    text-align: center;    
+}
+
+/* home.ejs page */
+.picone {
+    width: 100%; 
+    height: auto;
+    display: block;
+    margin: 0 auto; 
+    max-width: 900px; 
+    border: 5px solid #ddd; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    object-fit: cover; 
+    background-color: black;
+}
+.main-container {
+    background-color: rgb(129, 121, 7);
+}
+#reading-title h1 {
+    font-size: 20px; 
+    color: #b81717; 
+    text-align: center; 
+    margin-top: 20px;
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    font-family: 'Arial', sans-serif; 
+}
+
+
+/* nav page */
+
+.nav-container {
+    background-color: #412e03;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; 
+}
+
+.nav-content {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+nav a {
+    color: #eae6ef;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav a[href*="sign"] {
+    background-color: #a77406; 
+    color: #fff; 
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+nav a[href*="sign"]:hover {
+    background-color: #d4cadd; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ /* home.ejs page */
+.main-containter {
+    background-color: pink;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;   
+ }  
+ .content-container {
+    color: blue;
+    display: flex;
+    align-content: center;
+ }
+
+.nav-content {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: rgb(23, 3, 88);
+    margin: 0 10px;
+    padding: 8px 12px;
+    border-radius: 4 px;
+    transition: background-color 0.3s;
+    text-align: center;
+
+}
+nav a:hovver {
+    background-color: #e2e6ea;
+    color: rgb(68, 0, 255);
+}
+/* edit */
+
+
+
+

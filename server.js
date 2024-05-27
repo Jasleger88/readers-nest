@@ -69,10 +69,12 @@ app.get('/reader/:readerId', async (req, res) => {
 
 app.post('/reader', async (req, res) => {
     if (req.session.user) {
+        console.log("Received form data:", req.body); 
         try {
             const reader = await Reader.create(req.body);
             res.redirect("/reader");
         } catch (error) {
+            console.error("Error creating reader:", error); 
             res.render("error.ejs", { error: error.message });
         }
     } else {
@@ -94,16 +96,25 @@ app.delete('/reader/:readerId', async (req, res) => {
     }
 });
 
+app.get("/reader/:readerId/edit", async (req, res) => {
+    try {
+      const reader = await Reader.findById(req.params.readerId);
+      res.render("edit.ejs", {reader});
+    } catch (error) {
+      res.render("error.ejs", { error: error.message })
+    }
+  });
+
 
 app.put('/reader/:readerId', async (req, res) => {
     if (req.session.user) {
         try {
-            const UpdateReader = await Readers.findByAndUpdate(
+            const updatedReader = await Readers.findByAndUpdate(
                 req.params.readerId,
                 req.body,
                 { new: true }
             );
-            res.send(updatedReader)
+            res.send(UpdatedReader)
         } catch (error) {
             res.render('error.ejs', { error: error.message });
         }
@@ -111,6 +122,7 @@ app.put('/reader/:readerId', async (req, res) => {
         res.redirect('/auth/sign-in');
     }
 });
+
 
 
 const port = process.env.PORT || 3000;

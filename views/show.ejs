@@ -9,8 +9,8 @@
 <body>
     <form action="/reader/<%=reader._id %>?_method=DELETE" method="POST">
         <button type="submit">Delete <%= reader.name %></button>
-      </form>
       <a href="/reader/<%= reader._id %>/edit">Edit <%= reader.name %></a>
       <a href="/reader">Back to Readers Page</a>
+    </form>
 </body>
 </html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Let's Edit Your Selection Here</h1>
+    <%- include('./partials/nav') %>
+    <form action="/reader/<%= reader._id %>?_method=PUT" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        <label for="name">Your Name</label>
+        <input type="text" name="name"  id="name" value="<%= reader.name %>">
+
+        <label for="title">Title</label>
+        <input type="text" name="title"  id="title" value="<%= reader.title %>">
+
+        <label for="level">Book Level 1-3</label>
+        <input type="text" name="level"  id="level" value="<%= reader.level %>">
+</form>
+</body>
+</html>

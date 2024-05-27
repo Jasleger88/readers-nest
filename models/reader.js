@@ -6,4 +6,4 @@ const studentSchema = new mongoose.Schema({
     Level:{type: Number, required: true},
 })
 
-module.exports = mongoose.model("student", studentSchema)
+module.exports = mongoose.model("Reader", studentSchema)
