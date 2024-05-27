@@ -12,9 +12,8 @@ authRouter.post("/sign-up", async (req, res) => {
   req.body.password = hash;
 
   try {
-    const userIdDb = await UserModel.find({ username: req.body.username });
-
-    if (userIdDb) {
+    const usersWithUsername = await UserModel.find({ username: req.body.username });
+    if(usersWithUsername.lenght > 0){
       throw new Error("Username already taken");
     }
 
@@ -56,6 +55,9 @@ authRouter.post("/sign-in", async (req, res) => {
   } catch (error) {
     res.render("error.ejs", { message: error.message });
   }
+});
+authRouter.get('/sign-out', (req, res) => {
+  res.redirect('/sign-in');
 });
 
 module.exports = authRouter;
