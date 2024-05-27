@@ -8,7 +8,7 @@ const morgan = require('morgan')
 const mongoose = require('mongoose');
 const authRouter = require('./controllers/authController');
 const Reader = require("./models/reader.js");
-// const User = require("./models/user.js");
+;
 
 const app = express();
 app.use(express.json());
@@ -87,9 +87,9 @@ app.delete('/reader/:readerId', async (req, res) => {
     if (req.session.user) {
         try {
             const deletedReader = await Readers.findByIdAndDelete(req.params.readerId);
-            res.send(deletedReader);
+            res.redirect('/reader');
         } catch (error) {
-            res.render("error.ejs", { erorr: error.message })
+            res.render("error.ejs", { error: error.message })
         }
     } else {
         res.redirect("/auth/sign-in");
@@ -116,7 +116,7 @@ app.put('/reader/:readerId', async (req, res) => {
                 req.body,
                 { new: true }
             );
-            res.send(UpdatedReader)
+            res.redirect(`/reader/${req.params.readerId}`);
         } catch (error) {
             res.render('error.ejs', { error: error.message });
         }

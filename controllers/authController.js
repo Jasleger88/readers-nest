@@ -34,7 +34,6 @@ authRouter.post("/sign-in", async (req, res) => {
     const userFromDatabase = await UserModel.findOne({
       username: req.body.username,
     });
-
     const passwordsMatch = await bcrypt.compare(
       req.body.password,
       userFromDatabase.password
@@ -42,20 +41,20 @@ authRouter.post("/sign-in", async (req, res) => {
 
     console.log(userFromDatabase);
 
+    if (passwordsMatch) {
     req.session.user = {
       username: userFromDatabase.username,
       userId: userFromDatabase._id,
     };
-
-    if (passwordsMatch) {
       res.redirect("/");
     } else {
-      return res.send(`Login Failed`);
+     return res.send(`Login Failed`);
     }
   } catch (error) {
-    res.render("error.ejs", { message: error.message });
+    res.render("error.ejs", { error: error.message });
   }
 });
+
 authRouter.get('/sign-out', (req, res) => {
   res.redirect('/sign-in');
 });

@@ -9,11 +9,12 @@
 </head>
 
 <body>
-  
+  <h1>Reader Details</h1>
+    <%- include('./partials/nav') %>
   <form action="/reader/<%=reader._id %>?_method=DELETE" method="POST">
-    <button type="submit">Delete <%= reader.name %></button>
+    <button type="submit">Delete <%= reader.Name %></button>
+    </form>
     <a href="/reader">Back to Readers Page</a>
-  </form>
 </body>
 
 </html>

@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
-const studentSchema = new mongoose.Schema({
+const readerSchema = new mongoose.Schema({
     Name: { type: String, required: true},
     Title: {type: String, required: true},
     Level:{type: Number, required: true},
-})
+});
 
-module.exports = mongoose.model("Reader", studentSchema)
+module.exports = mongoose.model("Reader", readerSchema)

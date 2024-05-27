@@ -15,9 +15,16 @@ body {
     object-fit: cover; 
     background-color: black;
 }
-.main-container {
-    background-color: rgb(129, 121, 7);
-    
+.home-main-container {
+    background-color: rgb(146, 141, 61); 
+}
+.home-content-container {
+    text-align:center;
+}
+.homebody {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
 #reading-title {
@@ -30,7 +37,8 @@ body {
     align-items: center;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: rgb(53, 22, 22)
+    color: rgb(53, 22, 22);
+    text-align:center;
 }
 
 
@@ -73,7 +81,16 @@ nav a[href*="sign"]:hover {
     background-color: #ddddca; 
 }
 /* sign-in ejs */
-
+#sign-in-body {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-image: url("https://media.istockphoto.com/id/1295469942/photo/white-paper-on-brown-paper-background-with-copy-space-3d-illustration.webp?s=170667a&w=0&k=20&c=Jv3v3nkbl9KbPUTMXDZazjHqC5UH28P1ephd2kxQnGw=");
+    background-size: cover;
+}
 .container-sign-in {
     width: 300px;
     height:300px;
@@ -86,13 +103,17 @@ nav a[href*="sign"]:hover {
     justify-content: center;
     align-items: center;     
 }
-.container-sign-in > * {
-    margin-bottom: 60px;
-}
+
 .input-group{
     margin-bottom: 20px;
     text-align: left;
     width: 100%;
+}
+.input-group label {
+    margin-bottom: 5px;
+}
+.input-group input {
+    width: 100%
 }
 #sign-in-form{
     background-color: #966e0f;
@@ -110,25 +131,82 @@ nav a[href*="sign"]:hover {
     color: rgb(229, 225, 104);
     cursor: pointer;
     border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-top:10px ;
-    margin-left: auto;
-    margin-right: auto;
-    
+
 }
-#sign-in-body {
-    display:flex;
-    justify-content: space-around;
+/* sign up page */
+#sign-up-body {
+    display: flex;
+    justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    height: 100vh;
     padding: 0;
     background-image: url("https://media.istockphoto.com/id/1295469942/photo/white-paper-on-brown-paper-background-with-copy-space-3d-illustration.webp?s=170667a&w=0&k=20&c=Jv3v3nkbl9KbPUTMXDZazjHqC5UH28P1ephd2kxQnGw=");
     background-size: cover;
 }
+
+.container-sign-up {
+    width: 300px;
+    height: 300px;
+    background-color: #654c14;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-group-sign-up {
+    margin-bottom: 20px;
+    text-align: left;
+    width: 100%;
+}
+
+.input-group-sign-up label {
+    margin-bottom: 5px;
+}
+
+.input-group-sign-up input {
+    width: calc(100% - 10px); 
+}
+#sign-up-form {
+    background-color: #966e0f;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sign-up-button {
+    width: 100px;
+    padding: 10px;
+    border: none;
+    background-color: rgb(108, 87, 42);
+    color: rgb(229, 225, 104);
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.sign-up-page {
+    font-size:24px;
+    color: #261604;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+
+
 /* reader ejs. */
 #readers-selection{
     background-image:url('https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8M3wzNTg0NzYzfHxlbnwwfHx8fHw%3D');
@@ -226,39 +304,22 @@ button[type="submit"]:hover,
 a:hover {
   background-color: #3e3105;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  
- /* home.ejs page */
+ 
+
+
+
+
+
+
+/* home.ejs page */
+
 .main-containter {
     background-color: pink;
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;   
+    background-repeat: no-repeat;  
+    
  }  
  .content-container {
     color: rgb(219, 219, 226);
