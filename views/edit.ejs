@@ -8,21 +8,23 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
-<body>
+<body class="edit-page-body">
     <h1> Let's Edit Your Selection Here</h1>
     <%- include('./partials/nav') %>
-    <form action="/reader/<%= reader._id %>?_method=PUT" method="POST">
-        <label for="name">Your Name</label>
-        <input type="text" name="name" id="name" value="<%= reader.name %>">
+    <form class="edit-form" action="/reader/<%= reader._id %>?_method=PUT" method="POST">
+        <label class="form-label" for="name">Your Name</label>
+        <input class="form-input" type="text" name="name" id="name" value="<%= reader.name %>">
 
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" value="<%= reader.title %>">
+        <label class="form-label" for="title">Title</label>
+        <input class="form-input"type="text" name="title" id="title" value="<%= reader.title %>">
 
-        <label for="level">Book Level</label>
-        <input type="number" name="level" id="level" value="<%= reader.level %>">
+        <label class="form-label" for="level">Book Level</label>
+        <input class="form-input" type="number" name="level" id="level" value="<%= reader.level %>">
 
-        <button type="submit">'Update Book'</button>
+        <button class="form-button" type="submit">'Update Book'</button>
     </form>
     <a href="/reader">Back to Main Page</a>
+
 </body>
 </html>
+
