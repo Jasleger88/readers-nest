@@ -20,8 +20,9 @@
         <div class="books-container">
           <% reader.forEach(function(book) { %>
             <div class="book">
-              <p>
-                <%= book.Name %> - <%= book.Title %> - Level <%= book.level %></p>
+              <a href="/reader/<%= book._id%>">
+              <p><%= book.name %> - <%= book.title %> - Level <%= book.level %></p>
+            </a>
             </div>
               <% }); %>
             <% } else { %>
@@ -29,5 +30,6 @@
               <% } %>
         </div>
 </div>
+
 </body>
 </html>
