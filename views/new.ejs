@@ -15,10 +15,9 @@
       <div clas="new-reader-content">
         <h1>Opening the Pages Of Wonder</h1>
         <form action="/reader" method="POST">
-          <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" required>
-          </div>
+          
+            <input type="hidden" name="name" value= "<%= username %>">
+          
 
           <div class="form-group">
             <label for="title">Title:</label>
@@ -28,9 +27,10 @@
           <div class="form-group">
             <label for="level">Level:</label>
             <input type="number" name="level" id="level" required>
+            <small class="book-levels">1~Beginner, 2~Intermediate, 3~Advance</small>
           </div>
           
-          <button type="submit">Add Book</button>
+          <button class="click-to-add" type="submit">Click to Add</button>
           <a href="/reader"> Back To Reader Page</a>
         </form>
       </div>

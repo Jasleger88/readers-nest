@@ -20,7 +20,6 @@ authRouter.post("/sign-up", async (req, res) => {
     const newUser = await UserModel.create(req.body);
     res.redirect("/");
   } catch (error) {
-    console.log(error);
     res.render("auth/sign-up.ejs", { error: error.message });
   }
 });

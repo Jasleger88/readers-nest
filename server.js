@@ -14,7 +14,6 @@ const app = express();
 app.use(express.json());
 mongoose.connect(process.env.MONGODB_URI);
 
-// app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
@@ -41,14 +40,14 @@ app.get("/", (req, res) => {
 });
 
 app.get("/new-reader", async (req, res) => {
-    res.render("new.ejs");
+    const username = req.session.username;
+    res.render("new.ejs", {username});
 });
 
 app.get("/reader", async (req, res) => {
-    
+
     try {
-        const reader = await Reader.find();
-        console.log(reader);
+        const reader = await Reader.find().populate("createdBy");
         res.render("reader.ejs", {
             reader: reader,
         });
@@ -71,8 +70,8 @@ app.get('/reader/:readerId', async (req, res) => {
 
 app.post('/reader', async (req, res) => {
     if (req.session.user) {
-        console.log("Received form data:", req.body);
         try {
+            req.body.createdBy = req.session.user.userId
             const reader = await Reader.create(req.body);
             res.redirect("/reader");
         } catch (error) {
@@ -84,40 +83,62 @@ app.post('/reader', async (req, res) => {
     }
 });
 
-/to delete/
-
 app.delete('/reader/:reader_id', async (req, res) => {
-    try {
-        await Reader.findByIdAndDelete(req.params.reader_id);
-        res.redirect('/reader');
-    } catch (error) {
-        res.render('error.ejs', { error: error.message });
-    }
+    if (req.session.user) {
+        try {
+            const reader = await Reader.findById(req.params.reader_id);
+            if (reader && reader.createdBy.equals(req.session.user.userId)) {
+                await Reader.findByIdAndDelete(req.params.reader_id);
+                console.log("hi")
+                res.redirect('/reader');
+            } else {
+                res.render("error.ejs", {
+                    error: 'Delete your Selection Only'
+                });
+            };
+        } catch (error) {
+            res.render('error.ejs', { error: error.message });
+        }
+    } else {
+        res.redirect("/reader")
+    };
 });
 
-/edit/
+
 app.get("/reader/:readerId/edit", async (req, res) => {
-        const foundReader = await Reader.findById(req.params.readerId);
-        res.render('edit.ejs', {
-            reader: foundReader
-    });
-
+    if (req.session.user) {
+        try {
+            const foundReader = await Reader.findById(req.params.readerId);
+            if (foundReader && foundReader.createdBy.equals(req.session.user.userId)) {
+                res.render('edit.ejs', { reader: foundReader });
+        } else {
+            res.render("error.ejs", {
+                error: 'You can only edit your own reader entries'
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        res.render("error.ejs", { error: error.message });
+    }
+} else {
+    res.redirect('/auth/sign-in');
+}
 });
 
-/update/
 app.put('/reader/:readerId', async (req, res) => {
-    try {
-        await Reader.findByIdAndUpdate(req.params.readerId, req.body);
-        res.redirect(`/reader/${req.params.readerId}`);
-    } catch (error) {
-        res.render('error.ejs', { error: error.message });
-        res.redirect('/auth/sign-in');
+    if (req.session.user) {
+        try {
+            await Reader.findByIdAndUpdate(req.params.readerId, req.body);
+            res.redirect(`/reader/${req.params.readerId}`);
+        } catch (error) {
+            res.render('error.ejs', { error: error.message });
+            res.redirect('/auth/sign-in');
+        }
     }
 });
 
 
-
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);

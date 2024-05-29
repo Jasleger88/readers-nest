@@ -297,7 +297,15 @@ button[type="submit"]:hover,
 a:hover {
   background-color: #3e3105;
 }
- 
+.book-levels {
+  color:#cbcb16;
+  font-size: 15px;
+  font-weight: bold;  
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.click-to-add {
+    font-size: 15px;
+}
  
 /* home.ejs page */
 
@@ -384,9 +392,35 @@ nav a:hover {
     cursor: pointer;
 }
 .form-button:hover {
-    background-color: #261604;
+    background-color:#251e0e;
 }
-
-
-
-
+/* show.ejs page */
+.show-body {
+    background-color: #564d2f;
+}
+.delete {
+    font-size: 15px;
+}
+.show-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.books.container{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.button-container form, .button-container a {
+    margin: 0 30px;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+.reader-details strong {
+    font-weight: bold;
+    margin-right: 5px;
+}
