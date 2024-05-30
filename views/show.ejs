@@ -9,23 +9,32 @@
 </head>
 
 <body class="show-body">
-  <img class="background-image" src="https://images.unsplash.com/photo-1600818797017-d6e5027210bb?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTA3fHxyZWFkaW5nfGVufDB8fDB8fHww"  alt="cup of coffe in an open book">
+  <img class="background-image"
+    src="https://images.unsplash.com/photo-1600818797017-d6e5027210bb?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTA3fHxyZWFkaW5nfGVufDB8fDB8fHww"
+    alt="cup of coffe in an open book">
   <div class="show-container">
-  <h1>Reader Details</h1>
+    <h1>Reader Details</h1>
     <%- include('./partials/nav') %>
-    <div class="reader-details">
-    <h2><%= reader.name %></h2>
-    <p><%= reader.title %></p>
-    <p><%= reader.level %></p>
-  </div>
-  <div class="button-container">
-    <form class="box-form" action="/reader/<%=reader._id %>?_method=DELETE" method="POST">
-      <input type="hidden" name="_method" value="Delete">
-      <button class="delete" type="submit">Delete Entry</button>
-    </form>
-    <a href="/reader/<%= reader._id %>/edit">Edit Entry</a>
-    <a href="/reader">Back to Reader's Page</a>
+      <div class="reader-details">
+        <h2>
+          <%= reader.name %>
+        </h2>
+        <p>
+          <%= reader.title %>
+        </p>
+        <p>
+          <%= reader.level %>
+        </p>
       </div>
-    </div>
+        <div class="button-container">
+          <form class="box-form" action="/reader/<%=reader._id %>?_method=DELETE" method="POST">
+            <input type="hidden" name="_method" value="Delete">
+            <button class="delete" type="submit">Delete Entry</button>
+          </form>
+          <a href="/reader/<%= reader._id %>/edit">Edit Entry</a>
+          <a href="/reader">Back to Reader's Page</a>
+        </div>
+  </div>
 </body>
+
 </html>

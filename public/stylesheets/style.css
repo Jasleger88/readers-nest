@@ -88,7 +88,7 @@ nav a[href*="sign"]:hover {
     height: 100vh;
     margin: 0;
     padding: 0;
-    background-image: url("https://media.istockphoto.com/id/1295469942/photo/white-paper-on-brown-paper-background-with-copy-space-3d-illustration.webp?s=170667a&w=0&k=20&c=Jv3v3nkbl9KbPUTMXDZazjHqC5UH28P1ephd2kxQnGw=");
+    background-image: url("https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Ym9va3xlbnwwfHwwfHx8MA%3D%3D");
     background-size: cover;
 }
 .container-sign-in {
@@ -103,7 +103,6 @@ nav a[href*="sign"]:hover {
     justify-content: center;
     align-items: center;     
 }
-
 .input-group{
     margin-bottom: 20px;
     text-align: left;

@@ -15,9 +15,10 @@
       <div clas="new-reader-content">
         <h1>Opening the Pages Of Wonder</h1>
         <form action="/reader" method="POST">
-          
-            <input type="hidden" name="name" value= "<%= username %>">
-          
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" value="<%= user.username %>" required>
+          </div>
 
           <div class="form-group">
             <label for="title">Title:</label>
@@ -32,9 +33,9 @@
           
           <button class="click-to-add" type="submit">Click to Add</button>
           <a href="/reader"> Back To Reader Page</a>
-        </form>
       </div>
     </div>
+  </form>
 </body>
 
 </html>

@@ -40,14 +40,14 @@ app.get("/", (req, res) => {
 });
 
 app.get("/new-reader", async (req, res) => {
-    const username = req.session.username;
-    res.render("new.ejs", {username});
+    res.render("new.ejs");
 });
 
 app.get("/reader", async (req, res) => {
 
     try {
         const reader = await Reader.find().populate("createdBy");
+
         res.render("reader.ejs", {
             reader: reader,
         });
@@ -89,7 +89,6 @@ app.delete('/reader/:reader_id', async (req, res) => {
             const reader = await Reader.findById(req.params.reader_id);
             if (reader && reader.createdBy.equals(req.session.user.userId)) {
                 await Reader.findByIdAndDelete(req.params.reader_id);
-                console.log("hi")
                 res.redirect('/reader');
             } else {
                 res.render("error.ejs", {
@@ -136,6 +135,8 @@ app.put('/reader/:readerId', async (req, res) => {
         }
     }
 });
+
+
 
 
 const port = process.env.PORT || 3001;
