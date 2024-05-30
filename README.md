@@ -77,8 +77,117 @@ Bulk Add: Users can add multiple books to their library in one go, streamlining 
 * Middleware: { Method-override, Morgan, Dotenv }
 * Package Management: package.json
 
-##### Add image of HTML, JAVASCRIPT, MIddleWares #####
+## Full-Stack Integration 
 
+# Middleware
+```
+require("dotenv").config();
+const express = require("express");
+const methodOverride = require("method-override");
+const path = require("path");
+const session = require("express-session");
+
+const morgan = require('morgan')
+const mongoose = require('mongoose');
+const authRouter = require('./controllers/authController');
+const Reader = require("./models/reader.js");
+
+
+const app = express();
+app.use(express.json());
+mongoose.connect(process.env.MONGODB_URI);
+
+
+app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride("_method"));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(morgan('dev'));
+
+app.use(
+    session({
+        secret: process.env.SECRET_PASSWORD,
+        resave: false,
+        saveUninitialized: true,
+        cookie: { secure: false },
+    })
+)
+```
+
+# Frontend (HTML)
+
+```
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body id="readers-selection">
+  <%- include('./partials/nav') %>
+    <div class="readers-container">
+      <div class="readers-content">
+      <h1 class="hello-reader highlight">Hello Reader</h1>
+      <p class="readers-message highlight"> "Embark on a Journey through the pages of your adventure so far. Behold, the treasury of takes you've
+        traversed!"</p>
+    
+      <% if (reader && reader.length> 0 ) { %>
+        <div class="books-container">
+          <% reader.forEach(function(book) { %>
+            <div class="book">
+              <a href="/reader/<%= book._id%>">
+              <p><%= book.name %> - <%= book.title %> - Level <%= book.level %></p>
+            </a>
+            </div>
+              <% }); %>
+            <% } else { %>
+              <p> No Books Available</p>
+              <% } %>
+        </div>
+</div>
+
+</body>
+</html>
+
+```
+# Backend (Server.JS)
+
+```
+app.get("/reader/:readerId/edit", async (req, res) => {
+    if (req.session.user) {
+        try {
+            const foundReader = await Reader.findById(req.params.readerId);
+            if (foundReader && foundReader.createdBy.equals(req.session.user.userId)) {
+                res.render('edit.ejs', { reader: foundReader });
+        } else {
+            res.render("error.ejs", {
+                error: 'You can only edit your own reader entries'
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        res.render("error.ejs", { error: error.message });
+    }
+} else {
+    res.redirect('/auth/sign-in');
+}
+});
+
+app.put('/reader/:readerId', async (req, res) => {
+    if (req.session.user) {
+        try {
+            await Reader.findByIdAndUpdate(req.params.readerId, req.body);
+            res.redirect(`/reader/${req.params.readerId}`);
+        } catch (error) {
+            res.render('error.ejs', { error: error.message });
+            res.redirect('/auth/sign-in');
+        }
+    }
+});
+```
 
 
 
