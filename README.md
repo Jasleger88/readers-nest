@@ -1,5 +1,4 @@
-Add an Image Here of the app
-![Screenshot of the Reader's Nest App] ( ...)
+<img width="1440" alt="Readers Nest Home Page" src="https://github.com/Jasleger88/readers-nest-app/assets/166673099/f5eba9a6-d5e6-4e42-922a-22ca2658f827">
 
 ## Readers Nest App Overview
 
@@ -17,11 +16,12 @@ The idea for Readers Nest was born out of a passion for reading and a desire to 
 I wanted to build a platform that not only helps users keep track of their reading but also facilitate 
 meaningful interactions and recommendations within the reading community.
 
-
-
 ## Planning Process
 
-place image here 
+![Planning Process of Readers Nest](https://github.com/Jasleger88/readers-nest-app/assets/166673099/b187d0d6-aa13-4af4-b7d3-28053e8e3bf1)
+
+
+
 
 ## Features
 
