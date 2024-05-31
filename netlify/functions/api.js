@@ -1,3 +1,4 @@
+const serverless = require ('serverless-http')
 require("dotenv").config();
 const express = require("express");
 const methodOverride = require("method-override");
@@ -6,8 +7,8 @@ const session = require("express-session");
 
 const morgan = require('morgan')
 const mongoose = require('mongoose');
-const authRouter = require('./controllers/authController');
-const Reader = require("./models/reader.js");
+const authRouter = require('../../controllers/authController');
+const Reader = require("../../models/reader.js");
 
 
 const app = express();
@@ -17,7 +18,7 @@ mongoose.connect(process.env.MONGODB_URI);
 
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static("public"));
 app.use(morgan('dev'));
 
 app.use(
@@ -33,7 +34,7 @@ app.use(function (req, res, next) {
     res.locals.user = req.session.user;
     next();
 })
-app.use('/auth', authRouter);
+app.use('auth', authRouter);
 
 app.get("/", (req, res) => {
     res.render("home.ejs")
@@ -136,10 +137,4 @@ app.put('/reader/:readerId', async (req, res) => {
     }
 });
 
-
-const port = process.env.PORT || 3001;
-
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-    console.log(`My mongo db url is ${process.env.MONGODB_URI}`);
-});
+module.exports.handler = serverless(app)
