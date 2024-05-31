@@ -12,24 +12,28 @@
   <%- include('./partials/nav') %>
     <div class="readers-container">
       <div class="readers-content">
-      <h1 class="hello-reader highlight">Hello Reader</h1>
-      <p class="readers-message highlight"> "Embark on a Journey through the pages of your adventure so far. Behold, the treasury of takes you've
-        traversed!"</p>
-    
-      <% if (reader && reader.length> 0 ) { %>
-        <div class="books-container">
-          <% reader.forEach(function(book) { %>
-            <div class="book">
-              <a href="/reader/<%= book._id%>">
-              <p><%= book.name %> - <%= book.title %> - Level <%= book.level %></p>
-            </a>
-            </div>
+        <h1 class="hello-reader highlight">Hello Reader</h1>
+        <p class="readers-message highlight"> "Embark on a Journey through the pages of your adventure so far. Behold,
+          the treasury of takes you've
+          traversed!"</p>
+
+        <% if (reader && reader.length> 0 ) { %>
+          <div class="books-container">
+            <% reader.forEach(function(book) { %>
+              <div class="book">
+                <a href="/reader/<%= book._id%>">
+                  <p>
+                    <%= book.name %> - <%= book.title %> - Level <%= book.level %>
+                  </p>
+                </a>
+              </div>
               <% }); %>
-            <% } else { %>
-              <p> No Books Available</p>
-              <% } %>
-        </div>
-</div>
+                <% } else { %>
+                  <p> No Books Available</p>
+                  <% } %>
+          </div>
+      </div>
 
 </body>
+
 </html>

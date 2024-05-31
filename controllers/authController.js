@@ -13,7 +13,7 @@ authRouter.post("/sign-up", async (req, res) => {
 
   try {
     const usersWithUsername = await UserModel.find({ username: req.body.username });
-    if(usersWithUsername.lenght > 0){
+    if (usersWithUsername.lenght > 0) {
       throw new Error("Username already taken");
     }
 
@@ -29,31 +29,28 @@ authRouter.get("/sign-in", (req, res) => {
 });
 
 authRouter.post("/sign-in", async (req, res) => {
-  console.log(req.body.password)
-  
   try {
     const userFromDatabase = await UserModel.findOne({
       username: req.body.username,
     });
-    if (!userFromDatabase){
+    if (!userFromDatabase) {
       throw new Error("Login Failed")
     };
-    
+
     const passwordsMatch = bcrypt.compareSync(
       req.body.password,
       userFromDatabase.password
     );
 
-    console.log(userFromDatabase);
 
     if (passwordsMatch) {
-    req.session.user = {
-      username: userFromDatabase.username,
-      userId: userFromDatabase._id,
-    };
+      req.session.user = {
+        username: userFromDatabase.username,
+        userId: userFromDatabase._id,
+      };
       res.redirect("/");
     } else {
-     return res.send(`Login Failed`);
+      return res.send(`Login Failed`);
     }
   } catch (error) {
     res.render("error.ejs", { error: error.message });

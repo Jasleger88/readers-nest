@@ -13,22 +13,25 @@
         <div class="nav-container">
             <%- include('./partials/nav') %>
         </div>
-        <div class ="welcome-message">
-        <% if (user) { %>
-          <h1> Welcome to Reader's Nest, <%= user.username %>!</h1>
+        <div class="welcome-message">
+            <% if (user) { %>
+                <h1> Welcome to Reader's Nest, <%= user.username %>!</h1>
         </div>
-            <% } else { %>
-                <h1> <a href="/auth/sign-in">Welcome to Reader’s Nest Login Here </a></h1>
+        <% } else { %>
+            <h1> <a href="/auth/sign-in">Welcome to Reader’s Nest Login Here </a></h1>
             <% }; %>
-        </div>
-        <img class="picone"
-        src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHJlYWRpbmclMjBjbHVifGVufDB8fDB8fHww" alt = "reading picture"/>
-        <div class="home-content-container"> 
-                <h1 id="reading-title">"Reading Is Dreaming With Open Eyes"</h1>
-            </div>
-        </div>
+    </div>
+    <img class="picone"
+        src="https://images.unsplash.com/photo-1525715843408-5c6ec44503b1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHJlYWRpbmclMjBjbHVifGVufDB8fDB8fHww"
+        alt="reading picture" />
+    <div class="home-content-container">
+        <h1 id="reading-title">"Reading Is Dreaming With Open Eyes"</h1>
+    </div>
+    </div>
     </div>
 
 </body>
+
 </html>
+
 </html>

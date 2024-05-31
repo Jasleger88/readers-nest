@@ -11,20 +11,20 @@
 <body class="edit-page-body">
     <h1> Let's Edit Your Selection Here</h1>
     <%- include('./partials/nav') %>
-    <form class="edit-form" action="/reader/<%= reader._id %>?_method=PUT" method="POST">
-        <label class="form-label" for="name">Your Name</label>
-        <input class="form-input" type="text" name="name" id="name" value="<%= reader.name %>">
+        <form class="edit-form" action="/reader/<%= reader._id %>?_method=PUT" method="POST">
+            <label class="form-label" for="name">Your Name</label>
+            <input class="form-input" type="text" name="name" id="name" value="<%= reader.name %>">
 
-        <label class="form-label" for="title">Title</label>
-        <input class="form-input"type="text" name="title" id="title" value="<%= reader.title %>">
+            <label class="form-label" for="title">Title</label>
+            <input class="form-input" type="text" name="title" id="title" value="<%= reader.title %>">
 
-        <label class="form-label" for="level">Book Level</label>
-        <input class="form-input" type="number" name="level" id="level" value="<%= reader.level %>">
+            <label class="form-label" for="level">Book Level</label>
+            <input class="form-input" type="number" name="level" id="level" value="<%= reader.level %>">
 
-        <button class="form-button" type="submit">Update Book</button>
-    </form>
-    <a href="/reader">Back to Main Page</a>
+            <button class="form-button" type="submit">Update Book</button>
+        </form>
+        <a href="/reader">Back to Main Page</a>
 
 </body>
-</html>
 
+</html>

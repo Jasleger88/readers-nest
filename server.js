@@ -110,18 +110,18 @@ app.get("/reader/:readerId/edit", async (req, res) => {
             const foundReader = await Reader.findById(req.params.readerId);
             if (foundReader && foundReader.createdBy.equals(req.session.user.userId)) {
                 res.render('edit.ejs', { reader: foundReader });
-        } else {
-            res.render("error.ejs", {
-                error: 'You can only edit your own reader entries'
-            });
+            } else {
+                res.render("error.ejs", {
+                    error: 'You can only edit your own reader entries'
+                });
+            }
+        } catch (error) {
+            console.error(error);
+            res.render("error.ejs", { error: error.message });
         }
-    } catch (error) {
-        console.error(error);
-        res.render("error.ejs", { error: error.message });
+    } else {
+        res.redirect('/auth/sign-in');
     }
-} else {
-    res.redirect('/auth/sign-in');
-}
 });
 
 app.put('/reader/:readerId', async (req, res) => {
@@ -140,6 +140,4 @@ app.put('/reader/:readerId', async (req, res) => {
 const port = process.env.PORT || 3001;
 
 app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-    console.log(`My mongo db url is ${process.env.MONGODB_URI}`);
 });
