@@ -13,7 +13,7 @@ const Reader = require("../../models/reader.js");
 
 const app = express();
 app.use(express.json());
-mongoose.connect(process.env.MONGODB_URI);
+
 
 
 app.use(express.urlencoded({ extended: false }));
@@ -136,5 +136,12 @@ app.put('/reader/:readerId', async (req, res) => {
         }
     }
 });
+
+async function connectToDb() {
+    await mongoose.connect(process.env.MONGODB_URI);
+  }
+  
+  connectToDb()
+
 
 module.exports.handler = serverless(app)
